@@ -1,0 +1,721 @@
+:root {
+    --accent: #64d2ff;
+    --glass-bg: rgba(18, 22, 35, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.25);
+    --inner-bg: rgba(0, 0, 0, 0.25);
+    --text-main: #ffffff;
+    --text-muted: rgba(235, 235, 245, 0.7);
+    --danger: #ff453a;
+    --success: #30d158;
+}
+
+.font-inter {
+    font-family: 'Inter', sans-serif;
+}
+
+.font-outfit {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.font-tech {
+    font-family: 'Space Grotesk', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    background-color: #0b0d14; /* Deep dark base */
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+/* Dynamic Blurred Mesh Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%; left: -50%; 
+    width: 200%; height: 200%;
+    /* Creates massive glowing orbs of your accent colors */
+    background: 
+        radial-gradient(circle at 50% 50%, rgba(100, 210, 255, 0.08), transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(48, 209, 88, 0.05), transparent 40%);
+    filter: blur(80px); /* Heavy frosted blur */
+    z-index: -1;
+    pointer-events: none;
+    /* Slow, elegant shifting animation */
+    animation: ambientShift 25s ease-in-out infinite alternate;
+}
+
+@keyframes ambientShift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(8%, 8%) scale(1.1); }
+}
+
+.text-accent { color: var(--accent); }
+.text-danger { color: var(--danger); }
+.op-7 { opacity: 0.7; }
+.text-sm { font-size: 0.85rem; }
+.mb-1 { margin-bottom: 5px; }
+.mb-2 { margin-bottom: 10px; }
+.border-0 { border-bottom: none !important; box-shadow: none !important; margin-bottom: 0 !important; padding-bottom: 0 !important; }
+
+/* Animations */
+.stagger-anim {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   --- MAIN GLASS CARD (TITANIUM SLAB) --- 
+========================================= */
+.glass-card {
+    /* Rich, deep navy/slate frosted glass */
+    background: linear-gradient(135deg, rgba(22, 26, 38, 0.65) 0%, rgba(11, 13, 19, 0.85) 100%);
+    backdrop-filter: blur(35px) saturate(160%);
+    -webkit-backdrop-filter: blur(35px) saturate(160%);
+    border-radius: 24px;
+    
+    /* Flowless edges: No harsh solid borders, just light reflection */
+    border: none;
+    
+    /* 3D Slab Elevation */
+    box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.15), /* Top edge rim light */
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05), /* Subtle ambient outline */
+        inset 0 -2px 10px rgba(0, 0, 0, 0.5),      /* Inner volume depth */
+        0 20px 40px rgba(0, 0, 0, 0.6),            /* Massive floating shadow */
+        0 8px 16px rgba(0, 0, 0, 0.4);             /* Grounding shadow */
+}
+
+/* Layout */
+.settings-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 100px 20px 60px 20px; /* increased top padding to account for fixed header */
+}
+
+.settings-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1500;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.settings-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(18, 22, 35, 0.5); /* var(--glass-bg) */
+    backdrop-filter: blur(25px) saturate(250%);
+    -webkit-backdrop-filter: blur(25px) saturate(250%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.settings-header-inner {
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings-header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.back-btn {
+    color: #fff;
+    font-size: 1.2rem;
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(-3px);
+}
+
+.settings-group {
+    padding: 25px;
+    margin-bottom: 20px;
+}
+
+/* Subtle tweaks to inner lines so they match the deep 3D theme */
+.group-title {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); /* Etched line effect */
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    gap: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); /* Etched line effect */
+}
+
+.setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    padding-right: 15px;
+}
+
+.setting-label {
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.setting-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* =========================================
+   --- 3D PHYSICAL BUTTONS --- 
+========================================= */
+.action-btn {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 10px 22px;
+    border-radius: 999px; /* Pill shape */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    outline: none;
+    border: none;
+    
+    /* Physical 3D Physics */
+    transition: transform 0.2s cubic-bezier(0.3, 1, 0.4, 1), box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+    will-change: transform, box-shadow;
+}
+
+/* The Squish */
+.action-btn:active {
+    /* Physically pushes the button down into the card */
+    transform: scale(0.96) translateY(2px); 
+}
+
+/* --- Standard / Clear Buttons (Matte Titanium) --- */
+.outline-btn {
+    /* Matches the unpressed Unit Pill */
+    background: linear-gradient(180deg, #2b2f3d 0%, #1a1c24 100%);
+    color: #cbd5e1;
+    
+    /* 3D Bevels & Floating Shadow */
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.12), /* Top light hit */
+        inset 0 -4px 6px rgba(0, 0, 0, 0.7),       /* Bottom volume curve */
+        inset 1px 0 2px rgba(255, 255, 255, 0.05),
+        inset -1px 0 2px rgba(0, 0, 0, 0.4),
+        0 8px 16px rgba(0, 0, 0, 0.5),             /* Floating shadow */
+        0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.outline-btn:hover {
+    color: #ffffff;
+    background: linear-gradient(180deg, #353a4b 0%, #1d202a 100%);
+}
+
+.outline-btn:active {
+    /* Shadow collapses when pressed */
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.12),
+        inset 0 -4px 6px rgba(0, 0, 0, 0.8),
+        0 2px 4px rgba(0, 0, 0, 0.6), 
+        0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Danger / Reset Button (Deep Crimson Ignition) --- */
+.danger-btn {
+    background: linear-gradient(180deg, rgba(220, 38, 38, 0.15) 0%, rgba(153, 27, 27, 0.3) 100%);
+    color: #ff5c5c;
+    border: 1px solid rgba(255, 69, 58, 0.25);
+    
+    box-shadow:
+        inset 0 2px 3px rgba(255, 100, 100, 0.15), 
+        inset 0 -4px 6px rgba(0, 0, 0, 0.6),
+        0 8px 16px rgba(0, 0, 0, 0.4),
+        0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.danger-btn:hover {
+    color: #ffffff;
+    /* Ignites into a bright glowing red core */
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.85) 0%, rgba(185, 28, 28, 1) 100%);
+    border-color: rgba(255, 100, 100, 0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.3), 
+        inset 0 -4px 6px rgba(0, 0, 0, 0.5),
+        0 10px 20px rgba(220, 38, 38, 0.35), /* Red ambient glow */
+        0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.danger-btn:active {
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.3), 
+        inset 0 -4px 6px rgba(0, 0, 0, 0.6),
+        0 3px 6px rgba(220, 38, 38, 0.25);
+}
+
+/* =========================================
+   --- ON/OFF TOGGLE SWITCH (SCALED UP 3D ORB) --- 
+========================================= */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    /* Scaled up by ~15% */
+    width: 90px;
+    height: 42px;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+/* 1. The Deep Waterfall Track */
+.toggle-slider-round {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 999px;
+    
+    background: rgba(0, 0, 0, 0.2);
+    
+    /* Scaled up shadows for the deeper crater */
+    box-shadow:
+        inset 0 4px 12px rgba(0, 0, 0, 0.6),
+        inset 0 1px 4px rgba(0, 0, 0, 0.8),
+        inset 0 -2px 5px rgba(255, 255, 255, 0.05),
+        0 1px 1px rgba(255, 255, 255, 0.08);
+        
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ON State Track */
+input:checked + .toggle-slider-round {
+    background: linear-gradient(135deg, rgba(48, 209, 88, 0.92), rgba(100, 210, 255, 0.82));
+    box-shadow:
+        inset 0 4px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 4px rgba(0, 0, 0, 0.4),
+        inset 0 -2px 5px rgba(255, 255, 255, 0.3),
+        0 1px 1px rgba(255, 255, 255, 0.2),
+        0 0 14px rgba(100, 210, 255, 0.2);
+}
+
+/* 2. The 3D Frosted Glass Orb */
+.toggle-slider-round::before {
+    position: absolute;
+    content: "";
+    /* Scaled up to perfectly fit the 42px height with 4px padding */
+    height: 34px;
+    width: 34px;
+    left: 4px;
+    top: 4px;
+    border-radius: 50%;
+    
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(8px) saturate(120%);
+    -webkit-backdrop-filter: blur(8px) saturate(120%);
+    
+    /* Slightly heavier floating shadows for the bigger orb */
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.3),
+        inset 1px 0 3px rgba(255, 255, 255, 0.3),
+        inset -1px 0 3px rgba(0, 0, 0, 0.2),
+        0 8px 14px rgba(4, 8, 20, 0.6),
+        0 2px 6px rgba(4, 8, 20, 0.4);
+
+    transition: transform 0.5s cubic-bezier(0.3, 1, 0.4, 1), 
+                width 0.5s cubic-bezier(0.3, 1, 0.4, 1), 
+                box-shadow 0.3s ease;
+    will-change: transform, width;
+    z-index: 2;
+}
+
+/* 3. The Gliding Glare Dot */
+.toggle-slider-round::after {
+    content: "";
+    position: absolute;
+    /* Scaled up glare proportions */
+    height: 10px;
+    width: 18px;
+    left: 4px; 
+    top: 6px; 
+    border-radius: 50%;
+    
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 70%);
+    filter: blur(1px);
+    
+    /* Exact Math: (34px orb - 18px glare) / 2 = 8px exact center offset */
+    transform: translateX(8px); 
+    transition: transform 0.5s cubic-bezier(0.3, 1, 0.4, 1);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* =========================================
+   4. EXACT PIXEL MOVEMENT & SQUISH PHYSICS 
+========================================= */
+
+/* --- NORMAL RIGHT STATE --- */
+input:checked + .toggle-slider-round::before {
+    /* 90px track - 8px total pad - 34px orb = exactly 48px travel distance */
+    transform: translateX(48px);
+}
+input:checked + .toggle-slider-round::after {
+    /* 48px movement + 8px center offset = 56px */
+    transform: translateX(56px);
+}
+
+/* --- PRESSING LEFT STATE (OFF) --- */
+.toggle-switch input:active:not(:checked) + .toggle-slider-round::before {
+    width: 46px; /* Stretches exactly 12px to the right */
+    transform: translateX(0); /* Anchors flawlessly to the left wall */
+    
+    /* Physical push-down shadow */
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.3),
+        0 4px 8px rgba(4, 8, 20, 0.8),
+        0 1px 3px rgba(4, 8, 20, 0.6);
+}
+.toggle-switch input:active:not(:checked) + .toggle-slider-round::after {
+    transform: translateX(8px); /* Glare stays in place */
+}
+
+/* --- PRESSING RIGHT STATE (ON) --- */
+.toggle-switch input:active:checked + .toggle-slider-round::before {
+    width: 46px; /* Stretches exactly 12px to the left */
+    
+    /* MATH FIX: 90px container - 8px pad - 46px width = 36px travel.
+       This perfectly anchors the right side into the wall while stretching left! */
+    transform: translateX(36px);
+    
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.3),
+        0 4px 8px rgba(4, 8, 20, 0.8),
+        0 1px 3px rgba(4, 8, 20, 0.6);
+}
+.toggle-switch input:active:checked + .toggle-slider-round::after {
+    /* Glare stays perfectly pinned to the right edge during the squish! */
+    transform: translateX(56px);
+}
+
+/* Focus State Accessibility */
+.toggle-switch input:focus-visible + .toggle-slider-round {
+    outline: 2px solid rgba(100, 210, 255, 0.75);
+    outline-offset: 3px;
+}
+
+/* =========================================
+   --- DUAL UNIT TOGGLES --- 
+========================================= */
+.glass-toggle.small-toggle {
+    width: 154px; 
+    height: 48px; 
+}
+
+/* 1. The Deep Waterfall Track */
+.glass-toggle {
+    position: relative;
+    display: flex;
+    background: #0f111a; /* Very dark hollow core */
+    border-radius: 999px;
+    padding: 4px; /* Locked at 4px */
+    
+    /* Deep shadows diving in + Machined Aluminum Bottom Edge */
+    box-shadow:
+        inset 0 6px 14px rgba(0, 0, 0, 0.8),
+        inset 0 2px 5px rgba(0, 0, 0, 1),
+        inset 0 -2px 6px rgba(255, 255, 255, 0.03),
+        0 1px 1px rgba(255, 255, 255, 0.08),  /* Sharpened edge highlight */
+        0 2px 3px rgba(255, 255, 255, 0.02);  /* Extended edge reflection */
+        
+    border: none;
+    flex-shrink: 0;
+}
+
+/* 2. The 3D Floating Metallic Pill */
+.glass-toggle .toggle-slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    
+    /* EXACT PIXELS: (154px track - 8px padding) / 2 = 73px */
+    width: 73px; 
+    height: 40px;
+    border-radius: 999px;
+    
+    /* Matte Titanium Finish (Angled reflection over dark metal) */
+    background: 
+        linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%),
+        linear-gradient(180deg, #2b2f3d 0%, #12141c 100%);
+    z-index: 1;
+
+    /* Flawless 3D Pill Edges & Deep Navy Environmental Shadows */
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.15), /* Top light hit */
+        inset 0 -4px 6px rgba(0, 0, 0, 0.8),       /* Bottom volume curve */
+        inset 1px 0 2px rgba(255, 255, 255, 0.05),
+        inset -1px 0 2px rgba(0, 0, 0, 0.4),
+        
+        /* Floating Drop Shadows (Tinted deep navy to match environment) */
+        0 12px 20px rgba(4, 8, 20, 0.8),
+        0 4px 8px rgba(4, 8, 20, 0.6);
+
+    /* Locked identical transitions to prevent tearing */
+    transition: transform 0.5s cubic-bezier(0.3, 1, 0.4, 1), 
+                width 0.5s cubic-bezier(0.3, 1, 0.4, 1), 
+                box-shadow 0.3s ease;
+    will-change: transform, width, box-shadow;
+}
+
+/* 3. The Cinematic Glare */
+.glass-toggle .toggle-slider::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 0; 
+    width: 44px; /* Wide and elegant */
+    height: 16px;
+    
+    /* Soft, smooth, wide reflection */
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    filter: blur(2px);
+    
+    /* GPU Accelerated glide */
+    transform: translateX(6px); /* Starts 6px from the left edge */
+    transition: transform 0.5s cubic-bezier(0.3, 1, 0.4, 1);
+    pointer-events: none;
+}
+
+/* 4. The Text Buttons & Typography Dynamics */
+.toggle-btn.unit-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #5a6072; /* Slightly darker unselected text for better contrast vs white */
+    padding: 8px 0;
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 2;
+    /* Added transform transition for the pop */
+    transition: color 0.3s ease, transform 0.4s cubic-bezier(0.3, 1, 0.4, 1);
+}
+
+.toggle-btn.unit-btn.active {
+    color: #ffffff;
+    /* Rich text glow + heavy drop shadow */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 2px 4px rgba(0, 0, 0, 0.9);
+    transform: scale(1.12); /* The physical "Pop" */
+}
+
+/* =========================================
+   5. EXACT PIXEL MOVEMENT & SQUISH PHYSICS 
+========================================= */
+
+/* --- NORMAL RIGHT STATE --- */
+.glass-toggle[data-selected="right"] .toggle-slider {
+    /* 73px perfectly places the right edge exactly 4px from the wall. No overflow! */
+    transform: translateX(73px); 
+}
+.glass-toggle[data-selected="right"] .toggle-slider::before {
+    /* Glides the glare smoothly to the right side of the pill */
+    transform: translateX(23px); 
+}
+
+/* --- PRESSING LEFT STATE --- */
+.glass-toggle.is-pressing[data-selected="left"] .toggle-slider {
+    width: 89px; /* Stretches 16px */
+    transform: translateX(0); /* Anchored left */
+    
+    /* Squish Shadow (Tinted Navy) */
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.15),
+        inset 0 -4px 6px rgba(0, 0, 0, 0.8),
+        0 4px 8px rgba(4, 8, 20, 0.8),
+        0 2px 4px rgba(4, 8, 20, 0.6);
+}
+.glass-toggle.is-pressing[data-selected="left"] .toggle-slider::before {
+    transform: translateX(6px); /* Glare stays in place */
+}
+
+/* --- PRESSING RIGHT STATE --- */
+.glass-toggle.is-pressing[data-selected="right"] .toggle-slider {
+    width: 89px; /* Stretches 16px */
+    
+    /* 150px (wall) - 89px (new width) - 4px (initial left) = 57px. 
+       This PERFECTLY anchors the pill into the right wall while stretching left! */
+    transform: translateX(57px); 
+    
+    /* Squish Shadow (Tinted Navy) */
+    box-shadow:
+        inset 0 2px 3px rgba(255, 255, 255, 0.15),
+        inset 0 -4px 6px rgba(0, 0, 0, 0.8),
+        0 4px 8px rgba(4, 8, 20, 0.8),
+        0 2px 4px rgba(4, 8, 20, 0.6);
+}
+.glass-toggle.is-pressing[data-selected="right"] .toggle-slider::before {
+    /* Keeps the glare locked to the right edge during the stretch */
+    transform: translateX(39px); 
+}
+
+/* Footer */
+.about-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Toasts */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    background: rgba(20, 20, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transform: translateX(120%);
+    transition: transform 0.4s;
+    pointer-events: auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast.success i {
+    color: var(--success);
+}
+
+/* =========================================
+   --- MOBILE RESPONSIVENESS (SIDE-BY-SIDE) --- 
+========================================= */
+@media (max-width: 600px) {
+    .settings-wrapper { 
+        padding: 15px 15px 40px 15px; 
+    }
+
+    .settings-group { 
+        padding: 15px 20px; 
+    }
+
+    /* Force side-by-side layout, NEVER drop to next line */
+    .setting-item { 
+        flex-direction: row !important; 
+        flex-wrap: nowrap !important; 
+        align-items: center !important; 
+        gap: 15px;
+    }
+
+    /* Allow the text to wrap/shrink, but keep buttons safe on the right */
+    .setting-info {
+        flex: 1 1 auto;
+        min-width: 0; 
+        padding-right: 5px;
+    }
+
+    /* Prevent buttons/switches from being squished by long text */
+    .action-btn, 
+    .glass-toggle, 
+    .toggle-switch {
+        flex: 0 0 auto !important;
+    }
+
+    /* TALLER MOBILE BUTTONS */
+    .action-btn { 
+        padding: 10px 24px; 
+        font-size: 0.95rem; 
+    }
+
+    /* NOTE: The .glass-toggle width override was REMOVED here. 
+       It will now use the exact 154px math so it never overflows on phones! */
+
+    .toggle-btn.unit-btn {
+        font-size: 0.95rem; 
+    }
+
+    /* Toasts */
+    .toast-container { top: 10px; right: 10px; left: 10px; }
+    .toast { transform: translateY(-120%); justify-content: center; }
+    .toast.show { transform: translateY(0); }
+}

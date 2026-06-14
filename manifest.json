@@ -1,0 +1,21 @@
+{
+  "name": "Weatherly",
+  "short_name": "Weatherly",
+  "description": "Weather Dashboard",
+  "start_url": "./weather.html",
+  "display": "standalone",
+  "background_color": "#0b0c10",
+  "theme_color": "#0b0c10",
+  "icons": [
+    {
+      "src": "https://openweathermap.org/img/wn/02d@4x.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://openweathermap.org/img/wn/02d@4x.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

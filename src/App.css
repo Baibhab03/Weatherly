@@ -1,0 +1,9 @@
+/* Global App styles that aren't in weather.css or settings.css */
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.bg-freezing {
+  background: linear-gradient(to bottom, #1a2a6c, #112240, #0a192f);
+}
