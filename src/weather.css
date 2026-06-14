@@ -59,7 +59,7 @@ body.bg-fog { background: linear-gradient(to bottom, #5d6d7e, #34495e); }
 
 /* Glass Components */
 .glass-card {
-    background: var(--glass-bg); backdrop-filter: blur(35px) saturate(180%); -webkit-backdrop-filter: blur(35px) saturate(180%);
+    background: var(--glass-bg); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
     border: 1px solid var(--glass-border); border-top: 1px solid var(--glass-highlight); border-left: 1px solid var(--glass-highlight);
     border-radius: 24px; box-shadow: inset 0 -5px 15px rgba(0, 0, 0, 0.1), 0 15px 35px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
@@ -105,7 +105,7 @@ body.bg-fog { background: linear-gradient(to bottom, #5d6d7e, #34495e); }
 
 /* Toasts */
 .toast-container { position: fixed; top: 90px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
-.toast { background: var(--glass-bg); backdrop-filter: blur(25px) saturate(250%); -webkit-backdrop-filter: blur(25px) saturate(250%); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 15px 20px; border-radius: 14px; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto; }
+.toast { background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 15px 20px; border-radius: 14px; font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto; }
 .toast.show { transform: translateX(0); }
 .toast.error i { color: #ff453a; }
 .toast.warning i { color: #ffd60a; }
@@ -127,7 +127,7 @@ body.bg-fog { background: linear-gradient(to bottom, #5d6d7e, #34495e); }
 /* Layout */
 .app-wrapper { max-width: 1150px; margin: 0 auto; padding: 100px 20px 60px 20px; }
 .navbar { position: fixed; top: 0; left: 0; width: 100%; z-index: 1500; padding: 15px 20px; }
-.navbar::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--glass-bg); backdrop-filter: blur(25px) saturate(250%); -webkit-backdrop-filter: blur(25px) saturate(250%); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.navbar::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--glass-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
 .navbar-inner { max-width: 1110px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
 .menu-trigger { background: none; border: none; cursor: pointer; width: 28px; height: 18px; display: flex; flex-direction: column; justify-content: space-between; padding: 0; }
 .menu-trigger span { display: block; height: 2px; background: #fff; width: 100%; border-radius: 2px; transition: 0.3s; }
@@ -140,7 +140,7 @@ body.bg-fog { background: linear-gradient(to bottom, #5d6d7e, #34495e); }
 .search-container button { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 16px; padding: 0; }
 .suggestions-list {
     position: absolute; top: calc(100% + 10px); left: 0; width: 100%;
-    background: rgba(18, 22, 35, 0.4); backdrop-filter: blur(25px) saturate(180%); -webkit-backdrop-filter: blur(25px) saturate(180%);
+    background: rgba(18, 22, 35, 0.4); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
     border: 1px solid rgba(255, 255, 255, 0.15); border-top: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 20px; padding: 10px 5px 10px 10px; list-style: none; display: flex; flex-direction: column; gap: 5px;
     max-height: 350px; overflow-y: auto; overflow-x: hidden; z-index: 300;
