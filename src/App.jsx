@@ -27,6 +27,15 @@ function App() {
     const CACHE_PREFIX = 'weatherly_v1_';
 
     useEffect(() => {
+        const splash = document.getElementById('splash-screen');
+        if (splash) {
+            splash.style.opacity = '0';
+            splash.style.visibility = 'hidden';
+            setTimeout(() => splash.remove(), 500);
+        }
+    }, []);
+
+    useEffect(() => {
         if (weatherData && weatherData.availableDates && !activeDate) {
             // eslint-disable-next-line react-hooks/set-state-in-effect
             setActiveDate(weatherData.availableDates[0]);

@@ -90,8 +90,7 @@ body::before {
 .glass-card {
     /* Rich, deep navy/slate frosted glass */
     background: linear-gradient(135deg, rgba(22, 26, 38, 0.65) 0%, rgba(11, 13, 19, 0.85) 100%);
-    backdrop-filter: blur(35px);
-    -webkit-backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px); backdrop-filter: blur(35px); transform: translateZ(0);
     border-radius: 24px;
     
     /* Flowless edges: No harsh solid borders, just light reflection */
@@ -130,8 +129,7 @@ body::before {
     inset: 0;
     z-index: -1;
     background: rgba(18, 22, 35, 0.5); /* var(--glass-bg) */
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px); backdrop-filter: blur(25px); transform: translateZ(0);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -370,8 +368,7 @@ input:checked + .toggle-slider-round {
     border-radius: 50%;
     
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); transform: translateZ(0);
     
     /* Slightly heavier floating shadows for the bigger orb */
     box-shadow:
@@ -643,7 +640,7 @@ input:checked + .toggle-slider-round::after {
 
 .toast {
     background: rgba(20, 20, 30, 0.95);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); transform: translateZ(0);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
     padding: 15px 20px;
